@@ -26,7 +26,7 @@ def predict(image, descriptions):
 def main():
     st.set_page_config(layout="wide")
 
-    st.title("🔥How Well Does this Model Understand Images? Let's Find Out!")
+    st.title("🔥How Well Does this Model Understand Images? Can we use Emoji's to describe them? Let's find out!")
 
     # Instructions for the user
     st.markdown("---")
