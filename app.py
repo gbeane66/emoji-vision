@@ -1,26 +1,36 @@
 import streamlit as st
 import torch
-import clip
+import open_clip
 from PIL import Image
 import numpy as np
 
 # Load CLIP model and preprocessing
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model, preprocess = clip.load("ViT-B/32", device=device)
+model,_,preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k', device=device)
+model.eval()
+tokenizer = open_clip.get_tokenizer('ViT-B-32')
 
 # Function to predict descriptions and probabilities
 def predict(image, descriptions):
     image = preprocess(image).unsqueeze(0).to(device)
-    text = clip.tokenize(descriptions).to(device)
+    text = tokenizer(descriptions).to(device)
 
     with torch.no_grad():
         image_features = model.encode_image(image)
         text_features = model.encode_text(text)
 
-        logits_per_image, logits_per_text = model(image, text)
-        probs = logits_per_image.softmax(dim=-1).cpu().numpy()
+        # logits_per_image, logits_per_text = model(image, text)
+        # probs = logits_per_image.softmax(dim=-1).cpu().numpy()
+        
+        image_features /= image_features.norm(dim=-1, keepdim=True)
+        
+        text_features /= text_features.norm(dim=-1, keepdim=True)
 
-    return descriptions[np.argmax(probs)], np.max(probs)
+        probs = (100.0 * image_features @ text_features.T).softmax(dim=-1)
+    
+        print(probs)
+    
+    return descriptions[probs.argmax()], probs.max()
 
 # Streamlit app
 def main():

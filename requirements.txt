@@ -2,4 +2,5 @@ torch
 torchvision
 streamlit
 lightning
-openai_clip
+# openai_clip
+open_clip_torch
