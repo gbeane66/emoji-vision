@@ -4,9 +4,10 @@ import open_clip
 from PIL import Image
 
 # Load CLIP model and preprocessing
-device = "cuda" if torch.cuda.is_available() else "cpu"
+# device = "cuda" if torch.cuda.is_available() else "cpu"
+device = "cpu"  # For running on streamlit community cloud, use CPU only
 
-@st.cache_data
+@st.cache_resource
 def load_model():
 	  return open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k', device=device)
 
@@ -14,7 +15,7 @@ model,_,preprocess = load_model()
 
 model.eval()
 
-@st.cache_data
+@st.cache_resource
 def load_tokenizer():
     return open_clip.get_tokenizer('ViT-B-32')
 
