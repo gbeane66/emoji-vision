@@ -48,7 +48,7 @@ def predict(image, descriptions):
 def main():
     st.set_page_config(layout="wide")
 
-    st.title("🔥How Well Does this Model Understand Images? Can we use Emoji's to describe them? Let's find out!")
+    st.title("🔥How Well Do Vision Models Understand Images? Can we use Emoji's to describe them?")
 
     # Instructions for the user
     st.markdown("---")
@@ -56,14 +56,20 @@ def main():
 
     # Upload image through Streamlit with a unique key
     uploaded_image = st.file_uploader("Upload an image...", type=["jpg", "png", "jpeg"], key="uploaded_image")
+        
 
     if uploaded_image is not None:
         # Convert the uploaded image to PIL Image
         pil_image = Image.open(uploaded_image)
 
-        # Limit the height of the displayed image to 400px
-        st.image(pil_image, caption="Uploaded Image.", use_container_width=True, width=200)
         
+        # Convert to RGB if needed
+        if pil_image.mode != "RGB":
+            pil_image = pil_image.convert("RGB")
+
+        # Limit the height of the displayed image to 400px
+        img_width = st.slider("Scale image", min_value=400, max_value=800, value=600,step=20)
+        st.image(pil_image, caption="Uploaded Image", width=img_width, output_format="auto")
         # Instructions for the user
         st.markdown("### Truth or Fiction?")
         st.markdown("Describe the image (tip: you can use a single emoji!): One of the descriptions needs to be true.")
