@@ -1,6 +1,6 @@
-# torch
+torch
 # torchvision
-# streamlit
+streamlit
 # lightning
 # # openai_clip
-# open_clip_torch
+open_clip_torch

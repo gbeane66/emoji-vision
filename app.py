@@ -2,7 +2,6 @@ import streamlit as st
 import torch
 import open_clip
 from PIL import Image
-import numpy as np
 
 # Load CLIP model and preprocessing
 device = "cuda" if torch.cuda.is_available() else "cpu"
