@@ -37,7 +37,7 @@ Users upload an image and provide three possible descriptions (including emojis)
 
 <!-- ## 📸 Screenshots
 
-*(Include a few screenshots or a GIF of the app in action)*
+*(Still need to include a few screenshots or a GIF of the app in action)*
 
 --- -->
 
