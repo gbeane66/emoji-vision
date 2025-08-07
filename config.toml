@@ -1,0 +1,4 @@
+[server]
+maxCpu = 2
+maxMemory = 512
+serverTimeout = 60

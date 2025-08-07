@@ -11,6 +11,7 @@ model.eval()
 tokenizer = open_clip.get_tokenizer('ViT-B-32')
 
 # Function to predict descriptions and probabilities
+
 def predict(image, descriptions):
     image = preprocess(image).unsqueeze(0).to(device)
     text = tokenizer(descriptions).to(device)
