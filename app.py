@@ -5,9 +5,20 @@ from PIL import Image
 
 # Load CLIP model and preprocessing
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model,_,preprocess = open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k', device=device)
+
+@st.cache_data
+def load_model():
+	  return open_clip.create_model_and_transforms('ViT-B-32', pretrained='laion2b_s34b_b79k', device=device)
+
+model,_,preprocess = load_model()
+
 model.eval()
-tokenizer = open_clip.get_tokenizer('ViT-B-32')
+
+@st.cache_data
+def load_tokenizer():
+    return open_clip.get_tokenizer('ViT-B-32')
+
+tokenizer = load_tokenizer()
 
 # Function to predict descriptions and probabilities
 
