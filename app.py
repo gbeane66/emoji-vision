@@ -47,9 +47,9 @@ def main():
         st.markdown("Describe the image (tip: you can use a single emoji!): One of the descriptions needs to be true.")
 
         # Get user input for descriptions
-        description1 = st.text_input("Description 1:", placeholder='A red apple')
-        description2 = st.text_input("Description 2:", placeholder='A car parked in a garage')
-        description3 = st.text_input("Description 3:", placeholder='An orange fruit on a tree')
+        description1 = st.text_input("Description 1:", placeholder='🍎')
+        description2 = st.text_input("Description 2:", placeholder='🐎')
+        description3 = st.text_input("Description 3:", placeholder='🏚️')
 
         descriptions = [description1, description2, description3]
 
